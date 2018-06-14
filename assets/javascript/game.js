@@ -1,3 +1,5 @@
+$(document).ready(function() {
+
 //generating random number between 19 to 120
 var targetNumber = Math.floor(Math.random() * 102) + 19;
 
@@ -31,40 +33,50 @@ function reset(){
     console.log(targetNumber);
     $("#number-to-guess").text(targetNumber);
     
-    for (i=0; i<numberOptions.length; i++) {
-        numberOptions[i] = Math.floor(Math.random() * 12) + 1;
-    }
+    numberOptions[0] = Math.floor(Math.random() * 12) + 1;
+    numberOptions[1] = Math.floor(Math.random() * 12) + 1;
+    numberOptions[2] = Math.floor(Math.random() * 12) + 1;
+    numberOptions[3] = Math.floor(Math.random() * 12) + 1;
+
+    
     console.log(numberOptions);
-    } 
+    };
 
-
-
-for (var i = 0; i < numberOptions.length; i++) {
 
     // For each iteration, we will create an imageCrystal
-    var imageArray = $(".crystal-images");
-    console.log("1 : " + imageArray);
-    // First each crystal will be given the class ".crystal-image".
-    // This will allow the CSS to take effect.
+    var image1 = $("<img>");
+    var image2 = $("<img>");
+    var image3 = $("<img>");
+    var image4 = $("<img>");
     
-    imageArray.addClass("crystal-image");
-    //console.log("2 : " + imageArray);
-    
-    // Each imageCrystal will be given a src link to the crystal image
-    //imageArray.attr(".crystal-images");
 
-    //console.log("3 : " + imageArray);
-    // Each imageCrystal will be given a data attribute called data-crystalValue.
-    // This data attribute will be set equal to the array value.
-
-    imageArray.attr("data-crystalvalue", numberOptions[i]);
     
+    image1.addClass("crystal-images");
+    image2.addClass("crystal-images");
+    image3.addClass("crystal-images");
+    image4.addClass("crystal-images");
+    
+    image1.attr("src", "assets/images/amethyst.jpg");
+    image2.attr("src", "assets/images/clearquart.jpg");
+    image3.attr("src", "assets/images/diamond.jpg");
+    image4.attr("src", "assets/images/greenquart.jpg");
+
+    image1.attr("data-crystalvalue", numberOptions[0]);
+    image2.attr("data-crystalvalue", numberOptions[1]);
+    image3.attr("data-crystalvalue", numberOptions[2]);
+    image4.attr("data-crystalvalue", numberOptions[3]);
+    
+    // console.log(numberOptions[2]);
     // Lastly, each crystal image (with all it classes and attributes) will get added to the page.
-    $(".crystal-images").append(imageArray);
-  }
+    $("#crystals").append(image1);
+    $("#crystals").append(image2);
+    $("#crystals").append(image3);
+    $("#crystals").append(image4);
 
+$(".crystal-images").on("click", function() {
 
-$(".crystal-image").on("click", function() {
+    
+    
 
     
     var crystalValue = ($(this).attr("data-crystalvalue"));
@@ -77,7 +89,7 @@ $(".crystal-image").on("click", function() {
     $("#currentscore").text(counter);
 
     if (counter === targetNumber) {
-        console.log("You win!");
+        alert("You win!");
         wins++;
         $("#wins").text(wins);
         reset ()
@@ -89,8 +101,9 @@ $(".crystal-image").on("click", function() {
       }
   
       else if (counter >= targetNumber) {
-        console.log("You lose!!");
+        alert("You lose!!");
         losses++;
+        
         $("#losses").text(losses);
         reset()
         // counter = 0;
@@ -99,5 +112,9 @@ $(".crystal-image").on("click", function() {
         // $("#number-to-guess").text(targetNumber);
         // $("#currentscore").text(counter);
       }
+
     
+});
+
+
 });
